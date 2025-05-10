@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+body {
+  background: #000;
+  color: #fff;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:disabled {
+    cursor: no-drop;
+  }
+}
+
+@theme inline {
+  --animate-aurora: aurora 60s linear infinite;
+
+  @keyframes aurora {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
+}
