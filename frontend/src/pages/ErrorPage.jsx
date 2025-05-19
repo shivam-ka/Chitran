@@ -6,7 +6,6 @@ import { asstes } from '../assets/assets';
 const ErrorPage = () => {
     const navigate = useNavigate()
     const error = useRouteError();
-    console.error(error);
 
     return (
         <div className='h-[80vh] flex flex-col justify-center items-center' >

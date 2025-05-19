@@ -1,11 +1,15 @@
 import React from 'react'
 import './index.css'
-import Notification from './components/Notification/Notification'
+import { Footer, Navbar } from './components'
 
 const App = () => {
   return (
     <>
-      
+      <Navbar />
+      <main className='h-screen'>
+
+      </main>
+      <Footer/>
     </>
   )
 }

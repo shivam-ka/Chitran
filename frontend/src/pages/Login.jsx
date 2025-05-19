@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from "motion/react";
 import { AuroraBackground } from '../Aceternity UI/aurora-background'
-import { data, useNavigate } from 'react-router-dom';
-import { Button } from '../Aceternity UI/moving-border';
+import { useNavigate } from 'react-router-dom';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import { Loading } from '../components';
@@ -13,18 +12,9 @@ import Notification from '../components/Notification/Notification';
 const Login = () => {
 
     const navigate = useNavigate();
-    const [open, setOpen] = useState(false);
     const [isSubmiting, setIsSubmiting] = useState(false)
     const token = false
     const dispatch = useDispatch();
-
-    const handleClick = () => {
-        dispatch(showNotification({
-            type: "success",
-            message: 'Something went wrong!',
-            icon: '🚫',
-        }));
-    };
 
     const [formData, setFormData] = useState({
         identifier: '',
@@ -43,12 +33,21 @@ const Login = () => {
         e.preventDefault();
         setIsSubmiting(true)
         try {
+
             const response = await Axios({
-                ...SummaryApi.resgister, data: formData
+                ...SummaryApi.login, data: formData
             })
-            console.log(response)
+
+
         } catch (error) {
-            console.error(error.response.data)
+            console.error(error.response.data.data)
+            if (error.response.data.message) {
+                dispatch(showNotification({
+                    type: "error",
+                    message: error.response.data.message,
+                    icon: 'X',
+                }));
+            }
         }
         setIsSubmiting(false)
     };
@@ -111,15 +110,6 @@ const Login = () => {
                             <p>New To App? <span onClick={() => navigate('/register')} className='cursor-pointer text-orange-500 hover:underline'>Click Here</span> </p>
                         </div>
 
-                        {/* <Button
-                        disabled={isSubmiting}
-                        type='submit'
-                        borderRadius="0.5rem"
-                        className=" bg-slate-900  text-white  border-slate-800 disabled:cursor-no-drop"
-                    >{isSubmiting ? <Loading /> : "Login"}
-
-                    </Button> */}
-
                         <button
                             disabled={isSubmiting}
                             type='submit'
@@ -130,7 +120,7 @@ const Login = () => {
 
 
                     </form>
-                    <button onClick={handleClick}>Show Error</button>;
+
                 </motion.div>
             </AuroraBackground></>
 
