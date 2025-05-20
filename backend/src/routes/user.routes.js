@@ -17,7 +17,7 @@ userRouter.post("/login", loginUser);
 userRouter.get("/logout", verifyJWT, logoutUser);
 userRouter.post("/refresh-token", refreshAccessToken);
 userRouter.get("/get-current-user", verifyJWT, getCurrentUser);
-userRouter.get("/c/:username", verifyJWT, getUserChannelProfile);
+userRouter.post("/get-channel-profile",  getUserChannelProfile);
 userRouter.get("/watch-history", verifyJWT, getWatchHistory);
 
 export default userRouter;

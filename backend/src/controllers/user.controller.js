@@ -134,7 +134,7 @@ const logoutUser = asyncHandler(async (req, res) => {
       },
     },
     {
-      new: true,
+      new: true, // return the updated document
     },
   );
 
@@ -206,9 +206,10 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 });
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
-  const { username } = req.params;
+  const { username } = req.body;
+  console.log(username);
 
-  if (!username?.trime()) {
+  if (!username?.trim()) {
     return res.status(500).json(new ApiError(500, "username is missing"));
   }
 
